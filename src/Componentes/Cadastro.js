@@ -2,10 +2,10 @@ import React from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Cadastro({usuarios,setUsuarios}){
-    const [ nome, setNome] = React.useState("");
-    const [ status, setStatus] = React.useState(true);
-    const [ email, setEmail] = React.useState("");
+function Cadastro({usuarios,setUsuarios,editando}){
+    const [ nome, setNome ] = React.useState("");
+    const [ status, setStatus ] = React.useState(true);
+    const [ email, setEmail ] = React.useState("");
   
     function salvar(e){
         e.preventDefault()
@@ -81,16 +81,14 @@ function Cadastro({usuarios,setUsuarios}){
 
             return true;
     }
-
-    
-    
+   
     return(
         <div className="caixa"> 
 				<h2> Cadastro </h2>
 
 					<form id="Forms"onSubmit={(e) => salvar(e)}>
 						<div class="form-floating mb-3">
-							<input onChange={e => setNome(e.target.value)} class="form-control" id="txtNome" placeholder="Nome"/>
+							<input value={editando == null ? "" : editando.nome} onChange={e => setNome(e.target.value)} class="form-control" id="txtNome" placeholder="Nome"/>
 							<label for="txtNome">Nome</label>
 						</div>
 
@@ -112,4 +110,4 @@ function Cadastro({usuarios,setUsuarios}){
     )
 }
 
-export default Cadastro
+export default Cadastro;

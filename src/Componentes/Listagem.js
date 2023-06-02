@@ -5,6 +5,10 @@ function Listagem( props ){
 		props.setUsuarios(novos_usuarios)
 	}
 
+	function atualizar(usuario){
+		props.setEditando(usuario) 
+	}
+
     return(
         <div className="caixa">
 				<h2> Listagem </h2>
@@ -15,7 +19,7 @@ function Listagem( props ){
 							<p> Status: {item.status == true ? "Ativo" : "Banido"}</p>
 							<p> Email: {item.email}</p>
 							<button onClick={()=> remover(item)} className="btn btn-danger bnt-sm">Remover</button>
-
+							<button onClick={()=> atualizar(item)} className="btn btn-warning bnt-sm ms-2">Atualizar</button>
 						</div>
 					 )
 				}
