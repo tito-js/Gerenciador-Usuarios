@@ -2,18 +2,29 @@ import React from 'react';
 import "./App.css";
 import Listagem from "./Componentes/Listagem";
 import Cadastro from './Componentes/Cadastro';
+import supabase from './supabase';
 
 function App() {
 	
-	//Como usar um array com objetos dentro
-	const Usuarios_Padrao = [
-		{nome: "Gabriel", email: "@gmail.com", status: true},
-		{nome: "Grazi", email: "@gmail.com", status: true},
-		{nome: "Luana", email: "@gmail.com", status: true},
-		{nome: "Conrado", email: "@gmail.com", status:false}
-	]
+	const [ usuarios, setUsuarios] = React.useState([]);
 
-	const [ usuarios, setUsuarios] = React.useState(Usuarios_Padrao);
+	function buscaTodos(){
+		supabase.from("usuarios").select()
+		.then( response => {
+			console.log("Conexão bem sucedida!")
+			console.log( response.data )
+			setUsuarios( response.data )
+		} )
+		.catch( response => {
+			console.log("Deu erro na conexão ai")
+			console.log( response )
+		} )
+	}
+
+	React.useEffect( ()=> {
+		buscaTodos();
+
+	}, [] )
 
   return (
     <div className="container">
